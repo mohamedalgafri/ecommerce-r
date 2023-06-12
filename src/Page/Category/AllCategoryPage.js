@@ -1,28 +1,37 @@
 import React from 'react'
 import CategoryContainer from '../../Components/Category/CategoryContainer'
 import Pagination from '../../Components/Uitily/Pagination'
-import axios from 'axios'
 import baseUrl from '../../Api/baseURL'
 import { useEffect } from 'react'
+import { useSelector , useDispatch } from 'react-redux'
+import {getAllCategory} from '../../redux/actions/categoryAction'
 
 const AllCategoryPage = () => {
+    const dispatch = useDispatch();
 
-    const get = async ()=>{
-       const res = await baseUrl.get("/api/v1/categories");
+    useEffect(() => {
+      dispatch(getAllCategory(4));
+    });
+  
 
-       console.log(res.data)
-
+    const category = useSelector((state) => state.allCategory.category);
+    const loading = useSelector((state) => state.allCategory.loading);
+  
+    let pageCount = 0;
+    if(category.paginationResult){
+        pageCount = category.paginationResult.numberOfPages
+    }
+        
+    const getPage=(numPage)=>{
+        console.log(numPage);
     }
 
-    useEffect(()=>{
-        get();
-    },[])
 
     return (
         <div style={{minHeight:'670px'}}>
         
-            <CategoryContainer />
-            <Pagination />
+            <CategoryContainer data={category} loading={loading}  />
+            <Pagination pageCount={pageCount} getPage={getPage} />
         </div>
     )
 }
