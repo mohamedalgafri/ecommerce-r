@@ -20,7 +20,7 @@ const CategoryContainer = ({data , loading}) => {
               <CategoryCard
                 key={index}
                 title={item.name}
-                img={clothe}
+                img={item.image}
                 background="#F4DBA4"
               />
             ))

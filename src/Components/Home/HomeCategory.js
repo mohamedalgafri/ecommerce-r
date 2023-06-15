@@ -42,7 +42,7 @@ const HomeCategory = () => {
                 <CategoryCard
                   key={index}
                   title={item.name}
-                  img={clothe}
+                  img={item.image}
                   background={colors[index]}
                 />
               ))

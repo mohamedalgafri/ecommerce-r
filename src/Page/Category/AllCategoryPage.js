@@ -4,26 +4,30 @@ import Pagination from '../../Components/Uitily/Pagination'
 import baseUrl from '../../Api/baseURL'
 import { useEffect } from 'react'
 import { useSelector , useDispatch } from 'react-redux'
-import {getAllCategory} from '../../redux/actions/categoryAction'
+import {getAllCategory, getAllCategoryPage} from '../../redux/actions/categoryAction'
 
 const AllCategoryPage = () => {
     const dispatch = useDispatch();
 
+    //when first load
     useEffect(() => {
-      dispatch(getAllCategory(4));
-    });
+      dispatch(getAllCategory(5));
+    },[]);
   
-
+    //to get state from redux
     const category = useSelector((state) => state.allCategory.category);
     const loading = useSelector((state) => state.allCategory.loading);
   
+    //to page count
     let pageCount = 0;
     if(category.paginationResult){
         pageCount = category.paginationResult.numberOfPages
     }
         
+    //when press pagination
     const getPage=(numPage)=>{
-        console.log(numPage);
+        dispatch(getAllCategoryPage(numPage));
+        console.log(numPage)
     }
 
 
@@ -31,7 +35,12 @@ const AllCategoryPage = () => {
         <div style={{minHeight:'670px'}}>
         
             <CategoryContainer data={category} loading={loading}  />
-            <Pagination pageCount={pageCount} getPage={getPage} />
+            {
+                pageCount > 1 ? (
+                    <Pagination pageCount={pageCount} getPage={getPage} />
+                ):null
+            }
+            
         </div>
     )
 }

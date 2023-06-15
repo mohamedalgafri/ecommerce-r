@@ -5,18 +5,9 @@ import brand2 from "../../images/brand2.png";
 import brand3 from "../../images/brand3.png";
 import { Container, Row, Spinner } from "react-bootstrap";
 
-import { useSelector, useDispatch } from "react-redux";
-import { brandAction } from "../../redux/actions/brandAction";
-import { useEffect } from "react";
-const BrandContainer = () => {
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(brandAction());
-  }, []);
+const BrandContainer = ({data : brand , loading}) => {
 
-  const brand = useSelector((state) => state.allBrand.brands);
-  const loading = useSelector((state) => state.allBrand.loading);
 
   console.log(brand.data);
 
