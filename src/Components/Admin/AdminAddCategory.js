@@ -11,10 +11,10 @@ const AdminAddCategory = () => {
     const [img , setImg ] = useState(avatar);
     const [name , setName ] = useState();
     const [selectedFile , setSelectedFile ] = useState(null);
+    const [loading , setloading ] = useState(null);
 
     const dispatch = useDispatch();
 
-    const loading = useSelector(state => state.allCategory.loading)
 
     const onImgChange = (e)=> {
         if(e.target.files && e.target.files[0]){
@@ -26,15 +26,14 @@ const AdminAddCategory = () => {
 
     console.log(loading)
 
-    const handelSubmit =(event)=>{
+    const handelSubmit =async (event)=>{
         event.preventDefault();
         const formData = new FormData();
         formData.append("name" , name )
         formData.append("image" , selectedFile )
-        dispatch(createCategory(formData));
-        if(loading === true){
-            console.log("loading")
-        }
+        setloading(true)
+        await dispatch(createCategory(formData));
+        setloading(false)
     }
 
     useEffect(()=>{
@@ -42,10 +41,12 @@ const AdminAddCategory = () => {
         if(loading === false){
             setName("")
             setImg(avatar)
+            setSelectedFile(null)
+            setloading(true)
         }
         
 
-    })
+    },[loading])
 
     return (
         <div>

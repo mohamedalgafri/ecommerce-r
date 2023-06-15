@@ -8,17 +8,26 @@ const AllBrand = () => {
 
     const dispatch = useDispatch();
 
+    //when first load
     useEffect(() => {
-      dispatch(brandAction());
-    }, []);
+      dispatch(brandAction(2));
+    },[]);
   
+    //to get state from redux
     const brand = useSelector((state) => state.allBrand.brands);
     const loading = useSelector((state) => state.allBrand.loading);
-
-    let pageCount = 0
+  
+    //to page count
+    let pageCount = 0;
     if(brand.paginationResult){
-        pageCount = brand.paginationResult.numberOfPages;
-        console.log(pageCount)
+        pageCount = brand.paginationResult.numberOfPages
+    }
+
+        
+    //when press pagination
+    const getPage=(numPage)=>{
+        dispatch(brandAction(numPage));
+        console.log(numPage)
     }
 
     return (
@@ -26,7 +35,7 @@ const AllBrand = () => {
             <BrandContainer data={brand} loading={loading} />
             {
                 pageCount > 1 ?(
-                    <Pagination />
+                    <Pagination pageCount={pageCount} getPage={getPage} />
                 ):
                 ("")
             }
