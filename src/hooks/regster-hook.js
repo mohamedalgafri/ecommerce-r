@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const regsterHook = () => {
+const RegsterHook = () => {
     const [name , setName] = useState('');
     const [email , setEmail] = useState('');
     const [phone , setPhone] = useState('');
@@ -12,16 +12,16 @@ const regsterHook = () => {
         setName(e.target.value);
     }    
     const onChangeEmail = (e) => {
-        setName(e.target.value);
+        setEmail(e.target.value);
     }    
     const onChangePhone = (e) => {
-        setName(e.target.value);
+        setPhone(e.target.value);
     }    
     const onChangePassword = (e) => {
-        setName(e.target.value);
+        setPassword(e.target.value);
     }    
     const onChangeConfirmPassword = (e) => {
-        setName(e.target.value);
+        setConfirmPassword(e.target.value);
     }    
 
 
@@ -30,4 +30,4 @@ const regsterHook = () => {
 
 }
 
-export default regsterHook
+export default RegsterHook;

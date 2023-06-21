@@ -1,52 +1,13 @@
 import React, { useEffect } from 'react'
 import { Col, Row } from 'react-bootstrap'
-import avatar from '../../images/avatar.png'
-import { useState } from 'react'
-import axios from 'axios'
-import baseUrl from '../../Api/baseURL'
-import { useSelector , useDispatch } from 'react-redux'
-import { createCategory } from '../../redux/actions/categoryAction'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import notify from '../../hook/useNonafication'
+import AddCategoryHook from '../../hook/category/add-category-hook';
+
 const AdminAddCategory = () => {
 
-    const [img , setImg ] = useState(avatar);
-    const [name , setName ] = useState();
-    const [selectedFile , setSelectedFile ] = useState(null);
-    const [loading , setloading ] = useState(null);
-
-    const dispatch = useDispatch();
-
-
-    const onImgChange = (e)=> {
-        if(e.target.files && e.target.files[0]){
-            setImg(URL.createObjectURL(e.target.files[0]))
-            setSelectedFile(e.target.files[0])
-        }
-
-    }
-
-    console.log(loading)
-
-    const handelSubmit =async (event)=>{
-        event.preventDefault();
-        const formData = new FormData();
-        formData.append("name" , name )
-        formData.append("image" , selectedFile )
-        setloading(true)
-        await dispatch(createCategory(formData));
-        setloading(false)
-    }
-
-    useEffect(()=>{
-
-        if(loading === false){
-            setName("")
-            setImg(avatar)
-            setSelectedFile(null)
-            setloading(true)
-        }
-        
-
-    },[loading])
+    const [img , name  ,handelSubmit ,onChangeName ,onImgChange] = AddCategoryHook();
 
     return (
         <div>
@@ -62,7 +23,7 @@ const AdminAddCategory = () => {
                     </div>
 
                     <input
-                        onChange={(e)=>setName(e.target.value)}
+                        onChange={onChangeName}
                         value={name}
                         type="text"
                         className="input-form d-block mt-3 px-3"
@@ -75,6 +36,8 @@ const AdminAddCategory = () => {
                     <button onClick={handelSubmit} className="btn-save d-inline mt-2 ">حفظ التعديلات</button>
                 </Col>
             </Row>
+
+            <ToastContainer />
         </div>
     )
 }

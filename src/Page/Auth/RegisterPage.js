@@ -1,7 +1,8 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import RegisterHook from "../../hooks/regster-hook";
+import RegsterHook from "../../hooks/regster-hook";
+
 
 const RegisterPage = () => {
   const [
@@ -16,7 +17,7 @@ const RegisterPage = () => {
     onChangePhone,
     onChangePassword,
     onChangeConfirmPassword,
-  ] = RegisterHook();
+  ] = RegsterHook();
 
   return (
     <Container style={{ minHeight: "680px" }}>
