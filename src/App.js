@@ -23,7 +23,10 @@ import UserAllAddresPage from './Page/User/UserAllAddresPage';
 import UserAddAddressPage from './Page/User/UserAddAddressPage';
 import UserEditAddressPage from './Page/User/UserEditAddressPage';
 import UserProfilePage from "./Page/User/UserProfilePage";
+import AdminEditProdutPage from "./Page/Admin/AdminEditProdutPage";
+
 function App() {
+
   return (
     <div className="font" >
       <NavBarLogin />
@@ -51,6 +54,7 @@ function App() {
           <Route path="/user/add-address" element={<UserAddAddressPage />} />
           <Route path="/user/edit-address" element={<UserEditAddressPage />} />  
           <Route path="/user/profile" element={<UserProfilePage />} />  
+          <Route path="/admin/edit-prodict/:id" element={<AdminEditProdutPage />} />  
           
         </Routes>
       </BrowserRouter>

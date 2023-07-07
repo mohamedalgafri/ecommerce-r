@@ -4,7 +4,9 @@ import AdminSideBar from '../../Components/Admin/AdminSideBar'
 import AdminAllProducts from '../../Components/Admin/AdminAllProducts'
 import Pagination from '../../Components/Uitily/Pagination'
 import AdminAddProducts from '../../Components/Admin/AdminAddProducts'
+import ViewProductAdminHook from '../../hook/admin/view-product-admin-hook'
 const AdminAddProductsPage = () => {
+
     return (
         <Container >
             <Row className='py-3'>

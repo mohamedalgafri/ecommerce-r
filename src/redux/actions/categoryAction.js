@@ -1,6 +1,5 @@
-import {CREATE_CATEGORY, GET_ALL_CATEGORY , GET_ERROR} from '../type'
+import {CREATE_CATEGORY, GET_ALL_CATEGORY , GET_DETAILS_CATEGORY, GET_ERROR} from '../type'
 import useGetData from '../../hooks/useGetData'
-import baseUrl from '../../Api/baseURL'
 import { useInsertDataWithImage } from '../../hooks/useInsertData';
 
 
@@ -43,6 +42,27 @@ export const getAllCategoryPage = (page) => async (dispatch)=>{
         })
     }
 }
+
+//get Details category 
+export const getCategoryDetails = (id) => async (dispatch)=>{
+
+    try{
+        
+        const res = await useGetData(`/api/v1/categories/${id}`);
+
+        dispatch({
+            type:GET_DETAILS_CATEGORY,
+            payload: res,      
+        })
+
+    }catch(e){
+        dispatch({
+            type:GET_ERROR,
+            payload: "Error" + e, 
+        })
+    }
+}
+
 
 //create category 
 export const createCategory = (formData) => async (dispatch)=>{

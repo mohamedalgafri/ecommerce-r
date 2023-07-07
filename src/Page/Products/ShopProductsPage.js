@@ -5,22 +5,35 @@ import CardProductsContainer from '../../Components/Products/CardProductsContain
 import Pagination from '../../Components/Uitily/Pagination'
 import SearchCountResult from '../../Components/Uitily/SearchCountResult'
 import SideFilter from '../../Components/Uitily/SideFilter'
+import ViewSearchProductHook from '../../hook/product/view-search-product-hook'
 
 const ShopProductsPage = () => {
+
+    let [items , pagination , getPage] = ViewSearchProductHook();
+
+    let pageCount = 0;
+    if(pagination){
+        pageCount = pagination;
+    }else{
+        pageCount = 0;
+    }
+
     return (
         <div style={{ minHeight: '670px' }}>
             <CategoryHeader />
             <Container>
-                <SearchCountResult title="400 نتجية بحث" />
+                <SearchCountResult title={`هناك ${items.length} من النتائج`} />
                 <Row className='d-flex flex-row'>
                     <Col sm="2" xs="2" md="1" className='d-flex'>
                         <SideFilter />
                     </Col>
                     <Col sm="10" xs="10" md="11">
-                         <CardProductsContainer title="" btntitle=""/>
+                         <CardProductsContainer product={items} title="" btntitle=""/>
                     </Col>
                 </Row>
-                    <Pagination />
+                    {
+                        pageCount > 1 ?  <Pagination pageCount={pageCount} getPage={getPage} /> : null
+                    }
             </Container>
         </div>
     )

@@ -6,16 +6,9 @@ import Pagination from '../../Components/Uitily/Pagination'
 import ViewProductAdminHook from '../../hook/admin/view-product-admin-hook'
 import { useDispatch } from 'react-redux'
 import { getAllProductspage } from '../../redux/actions/productsAction'
-const AdminAllProductsPage = () => {
+import AdminEditProducts from '../../Components/Admin/AdminEditProducts'
 
-    const [items , pagination , getPage] = ViewProductAdminHook();
-    
-    let pageCount = 0;
-    if(pagination){
-        pageCount = pagination;
-    }
-
-
+const AdminEditProdutPage = () => {
 
     return (
         <Container >
@@ -25,14 +18,11 @@ const AdminAllProductsPage = () => {
                 </Col>
 
                 <Col sm="9" xs="10" md="10">
-                    <AdminAllProducts product={items} />
-                    
-                    { pageCount > 1 ?  <Pagination pageCount={pageCount} getPage={getPage} /> : null }
-                
+                    <AdminEditProducts   />
                 </Col>
             </Row>
         </Container>
     )
 }
 
-export default AdminAllProductsPage
+export default AdminEditProdutPage
