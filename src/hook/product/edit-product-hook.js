@@ -170,7 +170,6 @@ const EditProductHook = (id) => {
 
 
     let imgCover;
-
     if(images[0].length <= 1000){
         //conver url image to file
         convertURLtoFile(images[0]).then(val => imgCover = val)
@@ -201,8 +200,9 @@ const EditProductHook = (id) => {
     formData.append("price", priceBefore);
     formData.append("category", catId);
 
+
 setTimeout( async ()=>{
-    formData.append("imageCover", images[0]);
+    formData.append("imageCover", imgCover);
     itemImages.map((item) => formData.append("images", item));
 
 },1000)
@@ -210,30 +210,23 @@ setTimeout( async ()=>{
     colors.map((color) => formData.append("availableColors", color));
     selectedSubId.map((item) => formData.append("subcategory", item._id));
 
-    setLoading(true);
-    await dispatch(updateProducts( id ,formData));
-    setLoading(false);
+    setTimeout( async ()=>{
+      setLoading(true);
+      await dispatch(updateProducts( id ,formData));
+      setLoading(false);
+    },1000)
+
   };
 
   const products = useSelector((state) => state.allProducts.updateProduct);
 
   useEffect(() => {
     if (loading === false) {
-      setProdName("");
-      setCatId(0);
-      setProdDescription("");
-      setColors([]);
-      setImages([]);
-      setPriceBefore("السعر قبل الخصم");
-      setPriceAfter("السعر بعد الخصم");
-      setQty("الكمية المتاحة");
-      setBrandId("");
-      setSelectedSubId([]);
 
       setTimeout(() => setLoading(true), 1500);
 
       if (products) {
-        if (products.status === 201) {
+        if (products.status === 200) {
           notify("تمت التعديل بنجاح", "success");
         } else {
           notify("هناك مشكلة ", "error");
