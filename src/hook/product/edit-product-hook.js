@@ -94,15 +94,18 @@ const EditProductHook = (id) => {
   const brands = useSelector((state) => state.allBrand.brands);
 
   useEffect(() => {
-    if (item.data) {
-      setImages(item.data.images);
-      setProdName(item.data.title);
-      setProdDescription(item.data.description);
-      setPriceBefore(item.data.price);
-      setQty(item.data.quantity);
-      setCatId(item.data.category);
-      setColors(item.data.availableColors);
+    if(item){
+      if (item.data) {
+        setImages(item.data.images);
+        setProdName(item.data.title);
+        setProdDescription(item.data.description);
+        setPriceBefore(item.data.price);
+        setQty(item.data.quantity);
+        setCatId(item.data.category);
+        setColors(item.data.availableColors);
+      }
     }
+
   }, [item]);
 
 

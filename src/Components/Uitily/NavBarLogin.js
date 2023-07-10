@@ -7,6 +7,9 @@ import NavbarSearchHook from '../../hook/search/navbar-search-hook'
 const NavBarLogin = () => {
 
     const [searchWord , onChangeSearch] = NavbarSearchHook();
+    let word = ""
+        if(localStorage.getItem('searchWord') != null)
+            word = localStorage.getItem('searchWord');
     return (
         <Navbar className="sticky-top" bg="dark" variant="dark" expand="sm">
             <Container>
@@ -18,7 +21,7 @@ const NavBarLogin = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <FormControl
-                        value={searchWord}
+                        value={word}
                         onChange={onChangeSearch}
                         type="search"
                         placeholder="ابحث..."

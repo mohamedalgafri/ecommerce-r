@@ -11,19 +11,25 @@ const ViewSearchProductHook = () => {
     const allProduct = useSelector((state)=> state.allProducts.allProduct);
 
 
-    const getProduct = async (word)=>{
+    const getProduct = async ()=>{
+        let word = ""
+        if(localStorage.getItem('searchWord') != null)
+            word = localStorage.getItem('searchWord');
+
         await dispatch(getAllProductsSearch(`limit=${limit}&keyword=${word}`));
     }
 
     useEffect(()=>{
-        getProduct('')
+        getProduct()
     },[])
 
     let items = [];
     let pagination = [];
+    let results = [];
     try{
         if(allProduct.data){
             items = allProduct.data;
+       
         }else{
             items = [];
         }
@@ -38,15 +44,26 @@ const ViewSearchProductHook = () => {
         }
     }catch(e){}
 
+    try{
+        if(allProduct.results){
+            results = allProduct.results;
+        }else{
+            results=[];
+        }
+    }catch(e){}
+
     
 
 
     const getPage = async (page) =>{
-        await dispatch(getAllProductspage(page , 8))
+        let word = ""
+        if(localStorage.getItem('searchWord') != null)
+            word = localStorage.getItem('searchWord');
+        await dispatch(getAllProductsSearch(`limit=${limit}&page=${page}&keyword=${word}`))
     }
 
 
-  return [items , pagination , getPage , getProduct]
+  return [items , pagination , getPage , getProduct , results]
 
 }
 
