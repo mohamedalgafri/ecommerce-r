@@ -5,8 +5,8 @@ import { useEffect } from 'react';
 
 const NavbarSearchHook = () => {
 
-    let [searchWord , setSerachWord] = useState('');
-    const [items , pagination , getPage , getProduct] = ViewSearchProductHook();
+    let [searchWord , setSerachWord] = useState();
+    const [items , pagination , getPage , getProduct , results] = ViewSearchProductHook();
 
     const onChangeSearch =(e)=>{
         localStorage.setItem("searchWord" , e.target.value)

@@ -24,7 +24,7 @@ const ViewSearchProductHook = () => {
     }
 
     useEffect(()=>{
-        getProduct('')
+        getProduct()
     },[])
 
 
@@ -35,6 +35,7 @@ const ViewSearchProductHook = () => {
     try{
         if(allProduct.data){
             items = allProduct.data;
+       
         }else{
             items = [];
         }
