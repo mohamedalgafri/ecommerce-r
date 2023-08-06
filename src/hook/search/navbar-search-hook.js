@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import ViewSearchProductHook from '../product/view-search-product-hook';
+import { useEffect } from 'react';
 
 const NavbarSearchHook = () => {
 
@@ -8,10 +9,16 @@ const NavbarSearchHook = () => {
     const [items , pagination , getPage , getProduct] = ViewSearchProductHook();
 
     const onChangeSearch =(e)=>{
-        console.log(e.target.value)
+        localStorage.setItem("searchWord" , e.target.value)
         setSerachWord(e.target.value);
-        getProduct(e.target.value)
+
     }
+
+    useEffect(()=>{
+      setTimeout(()=>{
+        getProduct()
+      },1000)
+    },[searchWord])
 
   return [searchWord , onChangeSearch]
 }
